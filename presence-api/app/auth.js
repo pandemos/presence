@@ -2,6 +2,7 @@
  * Created by aknauss on 6/21/17.
  */
 
+
 var jwt = require('jsonwebtoken');
 
 module.exports = {
@@ -15,7 +16,7 @@ module.exports = {
         let profile = {
             username: request.username
         }
-        let token = jwt.sign(profile, 'secure-key');
+        let token = jwt.sign(profile, process.env.TOKEN_KEY);
         ctx.body = token;
     }
 };

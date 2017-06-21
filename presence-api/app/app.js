@@ -2,6 +2,10 @@
  * Created by aknauss on 6/21/17.
  */
 
+// TODO change this for production. Should be configurable somehow
+// Though really, it should be set per-user
+process.env.TOKEN_KEY = 'secure-key';
+
 const Koa = require('koa');
 const jwt = require('koa-jwt');
 const bodyParser = require('koa-bodyparser');
