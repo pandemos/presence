@@ -14,7 +14,8 @@ module.exports = {
         }
         // TODO: Authenticate against a database
         let profile = {
-            username: request.username
+            username: request.username,
+            role: "user"
         }
         let token = jwt.sign(profile, process.env.TOKEN_KEY);
         ctx.body = token;
