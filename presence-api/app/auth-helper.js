@@ -15,7 +15,7 @@ requireUser = function(f) {
 }
 
 checkRevoked = function(ctx, token, user) {
-    // TODO: Check database to see if auth is revoked
+    // TODO: Check to see if auth is revoked
     return Promise.resolve(false);
 }
 

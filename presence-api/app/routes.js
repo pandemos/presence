@@ -23,7 +23,7 @@ router
 
     // Login. Expects {username: "username", password: "password"} in the body
     .post('login', '/login', async ctx => {
-        auth.login(ctx);
+        await auth.login(ctx);
     })
     /* Add additional routes here. */
     ;
