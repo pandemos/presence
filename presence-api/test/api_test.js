@@ -79,7 +79,9 @@ describe('API success tests', () => {
                username: "user",
                email: "user@email.com",
                role: "user",
-               password: "changeme"
+               password: "changeme",
+               team: "default",
+               availability: {}
            })
            .end((err, res) => {
                res.should.have.status(200);
