@@ -13,6 +13,7 @@ module.exports = () => {
         mongoose: mongoose,
         db: db,
         save: (model) => {
+            console.log(model);
             model.save((err) => {
                if (err) {
                    throw err;

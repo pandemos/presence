@@ -8,6 +8,7 @@ const requireUser = require('./auth-helper.js').requireUser;
 const auth = require('./auth.js');
 
 const UserService = require('./service/user-service.js');
+const AvailabilityService = require('./service/availability-service.js');
 
 const router = require('koa-router')();
 
@@ -40,6 +41,16 @@ router
 
     .post('create-user', '/user', requireAdmin(async ctx => {
         await UserService.create(ctx, ctx.request.body);
+    }))
+
+    .post('set-core-hours', '/availability/:uid', requireUser(async ctx => {
+        await AvailabilityService.setCoreHours(
+            ctx,
+            ctx.params.uid,
+            ctx.request.body.start,
+            ctx.request.body.end,
+            ctx.request.body.tz
+        );
     }))
 
     /* Add additional routes here. */

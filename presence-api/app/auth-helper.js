@@ -9,7 +9,7 @@ requireUser = function(f) {
             throw {status: 401};
         }
         else {
-            f(ctx);
+            return f(ctx);
         }
     };
 }

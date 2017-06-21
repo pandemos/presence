@@ -9,7 +9,9 @@ function convertUserToProfile(user) {
         username: user.username,
         role: user.role,
         uid: user.uid,
-        email: user.email
+        email: user.email,
+        teams: user.teams,
+        availability: user.availability
     };
 }
 

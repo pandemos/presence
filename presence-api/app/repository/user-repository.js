@@ -6,10 +6,10 @@ const db = require('../db.js')();
 const User = require('../model/user.js');
 
 module.exports = {
-        save: (user) => { db.save(user); },
+        save: async (user) => { return db.save(user); },
         find: async pattern => User.find(pattern),
         create: async profile => {
             let user = new User(profile);
-            user.save(user);
+            return db.save(user);
         }
 };

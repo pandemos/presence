@@ -80,14 +80,30 @@ describe('API success tests', () => {
                email: "user@email.com",
                role: "user",
                password: "changeme",
-               team: "default",
-               availability: {}
+               teams: ["default"],
+               availability: {},
+               uid: 1
            })
            .end((err, res) => {
                res.should.have.status(200);
                done(err);
            });
 
+    });
+
+    it('Should set core hours and return 200 Ok', done => {
+       chai.request(server)
+           .post('/availability/1')
+           .set('Authorization', 'Bearer ' + process.env.TEST_TOKEN)
+           .send({
+               start: 900,
+               end: 1700,
+               tz: '-5:00'
+           })
+           .end((err, res) => {
+               res.should.have.status(200);
+               done(err)
+           });
     });
 
 });
