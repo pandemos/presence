@@ -46,7 +46,7 @@ app.use(function(ctx, next) {
 // Everything below this requires a valid JWT
 app.use(
     jwt({
-        secret: 'secure-key',
+        secret: process.env.TOKEN_KEY,
         passthrough: true,
         isRevoked: authHelper.checkRevoked
     }).unless({
