@@ -15,6 +15,8 @@ module.exports = {
             throw {status: 401};
         }
 
+        // We use UserRepository directly here because we
+        // need the passwords, which are not exposed in the service layer.
         await User.find({username: request.username})
         .then(result => {
             if (result.length == 0) {

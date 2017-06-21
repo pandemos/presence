@@ -33,6 +33,15 @@ router
         await UserService.all(ctx);
     }))
 
+    // Get a specific user by uid.
+    .get('user-by-id', '/user/:uid', requireAdmin(async ctx => {
+        await UserService.get(ctx, ctx.params.uid);
+    }))
+
+    .post('create-user', '/user', requireAdmin(async ctx => {
+        await UserService.create(ctx, ctx.request.body);
+    }))
+
     /* Add additional routes here. */
     ;
 

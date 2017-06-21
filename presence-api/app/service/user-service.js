@@ -2,28 +2,53 @@
  * Created by aknauss on 6/21/17.
  */
 
-User = require('../model/user.js');
 UserRepository = require('../repository/user-repository.js');
 
+function convertUserToProfile(user) {
+    return {
+        username: user.username,
+        role: user.role,
+        uid: user.uid,
+        email: user.email
+    };
+}
+
+function convertUsersToProfiles(users) {
+    return users.map(convertUserToProfile);
+}
+
 module.exports = {
+
     all: (ctx) => {
         return UserRepository
             .find()
-            .then(results => {
-                return results.map(user => {
-                    return {
-                        username: user.username,
-                        role: user.role,
-                        uid: user.uid,
-                        email: user.email
-                    };
-                })
-            })
+            .then(convertUsersToProfiles)
             .then(profiles => {
                 ctx.body = profiles;
-                console.log(profiles);
                 return profiles;
-            });
+            })
+    },
 
+    get: (ctx, uid) => {
+        return UserRepository
+            .find({uid: uid})
+            .then(convertUsersToProfiles)
+            .then(profiles => {
+                ctx.body = profiles[0];
+                return profiles[0];
+            })
+    },
+
+    save: user => {
+        UserRepository.save(user);
+    },
+
+    create: (ctx, user) => {
+       UserRepository
+           .create(user)
+           .then(() => {
+               ctx.status = 200;
+               ctx.body = 'Ok';
+           });
     }
 }
