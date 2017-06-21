@@ -7,6 +7,8 @@
 const requireUser = require('./auth-helper.js').requireUser;
 const auth = require('./auth.js');
 
+const UserService = require('./service/user-service.js');
+
 const router = require('koa-router')();
 
 router
@@ -25,6 +27,12 @@ router
     .post('login', '/login', async ctx => {
         await auth.login(ctx);
     })
+
+    // List users. Must be admin.
+    .get('user', '/user', requireAdmin(async ctx => {
+        await UserService.all(ctx);
+    }))
+
     /* Add additional routes here. */
     ;
 

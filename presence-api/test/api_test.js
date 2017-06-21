@@ -3,7 +3,7 @@
  */
 
 process.env.NODE_ENV = 'test';
-process.env.TEST_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwicm9sZSI6InVzZXIiLCJ1aWQiOjEsImVtYWlsIjoidXNlcjFAZ21haWwuY29tIiwiaWF0IjoxNDk4MDc5NTQzfQ.GcDhwxb6S2-7V201H6LXPrOKgyhFT0jkrcXO40u-4hg';
+process.env.TEST_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwicm9sZSI6ImFkbWluIiwidWlkIjoxLCJlbWFpbCI6InVzZXIxQGdtYWlsLmNvbSIsImlhdCI6MTQ5ODA4MDUzNX0.OdoxS6YkoKRlMCmT_FbfmAcGdODsELSn3UEkU_7l_Qc';
     // TODO: This needs to be set to a token that effectively never expires, or grab a fresh token each time.
 
 let chai = require('chai');

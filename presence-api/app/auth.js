@@ -21,7 +21,7 @@ module.exports = {
                 let u = new User({
                     username: request.username,
                     password: request.password,
-                    role: "user",
+                    role: "admin",
                     email: request.username + "@gmail.com",
                     uid: 1,
                     availability: {}
@@ -41,7 +41,6 @@ module.exports = {
                 role: user.role,
                 uid: user.uid,
                 email: user.email
-
             };
             let token = jwt.sign(profile, process.env.TOKEN_KEY);
             ctx.body = token;
@@ -49,6 +48,5 @@ module.exports = {
         .catch(err => {
             throw err;
         });
-
     }
 };

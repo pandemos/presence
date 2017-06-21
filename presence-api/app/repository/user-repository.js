@@ -7,6 +7,6 @@ const User = require('../model/user.js');
 
 module.exports = {
     save: (user) => { db.save(user); },
-    find: (pattern, callback) => User.find(pattern, callback)
+    find: async pattern => User.find(pattern)
 
 };
