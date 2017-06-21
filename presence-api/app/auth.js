@@ -23,13 +23,15 @@ module.exports = {
                     password: request.password,
                     role: "user",
                     email: request.username + "@gmail.com",
-                    uid: 1
+                    uid: 1,
+                    availability: {}
                 })
                 UserRepository.save(u);
                 console.log("User not found. Failing");
                 throw {status: 401};
             }
             let user = result[0];
+
             // TODO: Hash the password!
             if (request.password != user.password) {
                 throw {status: 401};
