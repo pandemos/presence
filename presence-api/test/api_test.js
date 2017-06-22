@@ -93,7 +93,7 @@ describe('API success tests', () => {
 
     it('Should set core hours and return 200 Ok', done => {
        chai.request(server)
-           .post('/availability/1')
+           .post('/availability')
            .set('Authorization', 'Bearer ' + process.env.TEST_TOKEN)
            .send({
                start: 900,
@@ -102,8 +102,39 @@ describe('API success tests', () => {
            })
            .end((err, res) => {
                res.should.have.status(200);
-               done(err)
+               done(err);
            });
+    });
+
+    it('Should set in office to true and return 200 Ok', done => {
+       chai.request(server)
+           .post('/availability/arrive')
+           .set('Authorization', 'Bearer ' + process.env.TEST_TOKEN)
+           .end((err, res) => {
+               res.should.have.status(200);
+               done(err);
+           })
+    });
+
+    it('Should set out of office to true and return 200 Ok', done => {
+        chai.request(server)
+            .post('/availability/depart')
+            .set('Authorization', 'Bearer ' + process.env.TEST_TOKEN)
+            .end((err, res) => {
+                res.should.have.status(200);
+                done(err);
+            })
+    });
+
+    it('Should return team-associated users', done => {
+       chai.request(server)
+           .get('/availability/team')
+           .set('Authorization', 'Bearer ' + process.env.TEST_TOKEN)
+           .end((err, res) => {
+               res.should.have.status(200);
+               done(err);
+           })
+
     });
 
 });

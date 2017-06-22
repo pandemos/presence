@@ -43,14 +43,34 @@ router
         await UserService.create(ctx, ctx.request.body);
     }))
 
-    .post('set-core-hours', '/availability/:uid', requireUser(async ctx => {
+    .post('set-core-hours', '/availability', requireUser(async ctx => {
         await AvailabilityService.setCoreHours(
             ctx,
-            ctx.params.uid,
+            ctx.state.user.uid,
             ctx.request.body.start,
             ctx.request.body.end,
             ctx.request.body.tz
         );
+    }))
+
+    .post('set-in-office', '/availability/arrive', requireUser(async ctx => {
+        await AvailabilityService.setInOffice(ctx, ctx.state.user.uid);
+    }))
+    .post('set-out-of-office', '/availability/depart', requireUser(async ctx => {
+        await AvailabilityService.setOutOfOffice(ctx, ctx.state.user.uid);
+    }))
+
+    .post('set-out-of-office-at', '/availability/schedule', requireUser(async ctx => {
+        await AvailabilityService.setOutOfOfficeAt(
+            ctx,
+            ctx.state.user.uid,
+            ctx.request.body.when,
+            ctx.request.body.reason
+        );
+    }))
+
+    .get('get-availability-for-team', '/availability/team', requireUser(async ctx => {
+        await AvailabilityService.getTeamAvailability(ctx, ctx.state.user.uid);
     }))
 
     /* Add additional routes here. */

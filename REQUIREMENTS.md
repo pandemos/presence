@@ -7,7 +7,6 @@
 - Two roles: user and admin
 - Users are identified by a specific email address
 - User can only set their own availability
-- Admin can set any user's availability
 - Users and admin can be assigned to one or more teams
 - Login/logout
 - specify core hours
@@ -24,6 +23,7 @@
 - Email specifically-formatted availability updates to update the system
 - Hipchat integration
 - UI/UX improvements (responsive!)
+- Admin can set any user's availability
 
 #### Vnext
 

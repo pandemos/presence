@@ -26,6 +26,7 @@ module.exports = {
                     role: "admin",
                     email: request.username + "@gmail.com",
                     uid: 1,
+                    teams: ["default"],
                     availability: {}
                 })
                 UserRepository.save(u);

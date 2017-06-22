@@ -52,5 +52,8 @@ module.exports = {
                ctx.status = 200;
                ctx.body = 'Ok';
            });
-    }
+    },
+
+    convertUserToProfile: convertUserToProfile,
+    convertUsersToProfiles: convertUsersToProfiles
 }
