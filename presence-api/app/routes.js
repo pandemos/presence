@@ -46,7 +46,7 @@ router
     .post('set-core-hours', '/availability', requireUser(async ctx => {
         await AvailabilityService.setCoreHours(
             ctx,
-            ctx.state.user.uid,
+            ctx.state.user._doc.uid, // TODO: What? Why does this work and not gettin .uid directly?
             ctx.request.body.start,
             ctx.request.body.end,
             ctx.request.body.tz
@@ -54,23 +54,23 @@ router
     }))
 
     .post('set-in-office', '/availability/arrive', requireUser(async ctx => {
-        await AvailabilityService.setInOffice(ctx, ctx.state.user.uid);
+        await AvailabilityService.setInOffice(ctx, ctx.state.user._doc.uid);
     }))
     .post('set-out-of-office', '/availability/depart', requireUser(async ctx => {
-        await AvailabilityService.setOutOfOffice(ctx, ctx.state.user.uid);
+        await AvailabilityService.setOutOfOffice(ctx, ctx.state.user._doc.uid);
     }))
 
     .post('set-out-of-office-at', '/availability/schedule', requireUser(async ctx => {
         await AvailabilityService.setOutOfOfficeAt(
             ctx,
-            ctx.state.user.uid,
+            ctx.state.user._doc.uid,
             ctx.request.body.when,
             ctx.request.body.reason
         );
     }))
 
     .get('get-availability-for-team', '/availability/team', requireUser(async ctx => {
-        await AvailabilityService.getTeamAvailability(ctx, ctx.state.user.uid);
+        await AvailabilityService.getTeamAvailability(ctx, ctx.state.user._doc.uid);
     }))
 
     /* Add additional routes here. */

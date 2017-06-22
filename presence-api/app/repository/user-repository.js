@@ -9,7 +9,7 @@ module.exports = {
         save: async (user) => { return db.save(user); },
         find: async pattern => User.find(pattern),
         create: async profile => {
-            let user = User.find({uid: profile.uid})
+            User.find({uid: profile.uid})
                 .then ((user) => {
                     if (!user) {
                         user = new User(profile);
