@@ -1,0 +1,14 @@
+version: '2'
+services:
+    db:
+        image: mongo
+    api:
+        build: ./presence-api
+        ports: 
+            - "3000:3000"
+        depends_on:
+            - "db"
+    web:
+        build: ./presence-web
+        ports: 
+            - "8000:8000"

@@ -8,3 +8,7 @@ View implemented features in FEATURES.md
 
 - presence-api is the API layer. Implemented in node.js, it presents a REST API and uses a MongoDB backend.
 - presence-web is the frontend layer. It uses node.js and AngularJS.
+
+## Running
+
+Fully dockerized. Run `docker-compose up` from the root directory.

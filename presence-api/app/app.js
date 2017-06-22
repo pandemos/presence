@@ -5,7 +5,7 @@
 // TODO change this for production. Should be configurable somehow
 // Though really, it should be set per-user
 process.env.TOKEN_KEY = 'secure-key';
-process.env.DB_URL = 'mongodb://localhost/presence';
+process.env.DB_URL = 'mongodb://db/presence';
 
 const Koa = require('koa');
 const jwt = require('koa-jwt');
