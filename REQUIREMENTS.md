@@ -15,6 +15,8 @@
 - out-of-office-at TIME
 - View availability by team
 
+Note: API is complete for MVP. Frontend CRUD needs to be implemented.
+
 #### V1
 
 - 100% unit test coverage
@@ -24,6 +26,7 @@
 - Hipchat integration
 - UI/UX improvements (responsive!)
 - Admin can set any user's availability
+- Full docker-compose environment (API and web and db)
 
 #### Vnext
 

@@ -1,5 +1,7 @@
 # Features
 
+#### API 
+
 - Strong unit test coverage
 - JWT-based Authentication & Authorization
 - Two roles: user and admin
@@ -11,3 +13,7 @@
 - out-of-office-now
 - out-of-office-at TIME
 - View availability by team
+
+#### Frontend
+
+- AngularJS

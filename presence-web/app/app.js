@@ -4,15 +4,12 @@
 angular.module('presence', [
   'angular-jwt',
   'ngRoute',
-  'presence.view1',
-  'presence.view2',
+  'presence.availability',
   'presence.version'
 ]).
 config(function Config($httpProvider, jwtOptionsProvider) {
     jwtOptionsProvider.config({
-       //tokenGetter: ['authService', function(authService) {
        tokenGetter: [function() {
-           //authService.doSomething();
            return localStorage.getItem('id_token');
        }]
     });
@@ -21,5 +18,5 @@ config(function Config($httpProvider, jwtOptionsProvider) {
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
 
-  $routeProvider.otherwise({redirectTo: '/view1'});
+  $routeProvider.otherwise({redirectTo: '/availability'});
 }]);
