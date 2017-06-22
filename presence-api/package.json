@@ -19,7 +19,8 @@
     "prestart": "npm install",
     "start": "node app/koa-app.js",
     "pretest": "npm install",
-    "test": "mocha $(find test -name '*_test.js')"
+    "test": "mocha $(find test -name '*_test.js')",
+    "dockerbuild": "docker build -t pandemos/presence-api"
   },
   "dependencies": {
     "jsonwebtoken": "^7.4.1",
