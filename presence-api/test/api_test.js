@@ -18,20 +18,23 @@ const should = chai.should();
 chai.use(chaiHttp);
 
 describe('API success tests', () => {
+
+    const sampleUser = {
+        username: "user",
+        email: "user@email.com",
+        role: "user",
+        password: "changeme",
+        teams: ["default"],
+        availability: {},
+        uid: 1
+
+    };
+
     beforeEach((done) => {
         User
             .remove({})
             .then(() => {
-                const u = new User({
-                    username: "user",
-                    email: "user@email.com",
-                    role: "user",
-                    password: "changeme",
-                    teams: ["default"],
-                    availability: {},
-                    uid: 1
-
-                });
+                const u = new User(sampleUser);
                 u.save(() => {});
                 process.env.TEST_TOKEN = auth.getTestToken(process.env.TOKEN_KEY, u);
                 done();
@@ -63,7 +66,7 @@ describe('API success tests', () => {
         chai.request(server)
             .post('/login')
             .set('Content-Type', 'application/json')
-            .send({username: "user", password: "changeme"})
+            .send({username: sampleUser.username, password: sampleUser.password})
             .end((err, res) => {
                 res.should.have.status(200);
                 res.should.be.text;
@@ -97,15 +100,7 @@ describe('API success tests', () => {
        chai.request(server)
            .post('/user')
            .set('Authorization', 'Bearer ' + process.env.TEST_TOKEN)
-           .send({
-               username: "user",
-               email: "user@email.com",
-               role: "user",
-               password: "changeme",
-               teams: ["default"],
-               availability: {},
-               uid: 1
-           })
+           .send(sampleUser)
            .end((err, res) => {
                res.should.have.status(200);
                done(err);

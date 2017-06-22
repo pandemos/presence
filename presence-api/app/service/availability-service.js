@@ -10,6 +10,7 @@ function updateAvailability(ctx, uid, update) {
         .find({uid: uid})
         .then(async users => {
             let user = users[0];
+            console.log(uid);
             console.log(user);
             if (!user.availability) {
                 user.availability = {};

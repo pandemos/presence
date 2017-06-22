@@ -20,17 +20,6 @@ module.exports = {
         await User.find({username: request.username})
         .then(result => {
             if (result.length == 0) {
-                let u = new User({
-                    username: request.username,
-                    password: request.password,
-                    role: "admin",
-                    email: request.username + "@gmail.com",
-                    uid: 1,
-                    teams: ["default"],
-                    availability: {}
-                })
-                UserRepository.save(u);
-                console.log("User not found. Failing");
                 throw {status: 401};
             }
             let user = result[0];
@@ -39,13 +28,7 @@ module.exports = {
             if (request.password != user.password) {
                 throw {status: 401};
             }
-            let profile = {
-                username: user.username,
-                role: user.role,
-                uid: user.uid,
-                email: user.email
-            };
-            let token = jwt.sign(profile, process.env.TOKEN_KEY);
+            let token = jwt.sign(user, process.env.TOKEN_KEY);
             ctx.body = token;
         })
         .catch(err => {
