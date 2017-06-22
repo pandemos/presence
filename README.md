@@ -12,3 +12,5 @@ View implemented features in FEATURES.md
 ## Running
 
 Fully dockerized. Run `docker-compose up` from the root directory.
+
+Requires a .env file. `cp default.env .env` for a development environment.
