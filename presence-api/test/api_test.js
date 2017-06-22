@@ -3,19 +3,41 @@
  */
 
 process.env.NODE_ENV = 'test';
-process.env.TEST_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwicm9sZSI6ImFkbWluIiwidWlkIjoxLCJlbWFpbCI6InVzZXIxQGdtYWlsLmNvbSIsImlhdCI6MTQ5ODA4MDUzNX0.OdoxS6YkoKRlMCmT_FbfmAcGdODsELSn3UEkU_7l_Qc';
-    // TODO: This needs to be set to a token that effectively never expires, or grab a fresh token each time.
+process.env.TOKEN_KEY = 'secret';
 
 process.env.DB_URL = 'mongodb://localhost/presence-test'
 
-let chai = require('chai');
-let chaiHttp = require('chai-http');
-let server = require('../app/app.js');
-let should = chai.should();
+const User = require('../app/model/user.js');
+const auth = require('../app/auth.js');
+
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const server = require('../app/app.js');
+const should = chai.should();
 
 chai.use(chaiHttp);
 
 describe('API success tests', () => {
+    beforeEach((done) => {
+        User
+            .remove({})
+            .then(() => {
+                const u = new User({
+                    username: "user",
+                    email: "user@email.com",
+                    role: "user",
+                    password: "changeme",
+                    teams: ["default"],
+                    availability: {},
+                    uid: 1
+
+                });
+                u.save(() => {});
+                process.env.TEST_TOKEN = auth.getTestToken(process.env.TOKEN_KEY, u);
+                done();
+            });
+
+    });
 
     it('Should return 200 Ok from /GET health', (done) => {
         chai.request(server)
@@ -41,7 +63,7 @@ describe('API success tests', () => {
         chai.request(server)
             .post('/login')
             .set('Content-Type', 'application/json')
-            .send({username: "test", password: "test"})
+            .send({username: "user", password: "changeme"})
             .end((err, res) => {
                 res.should.have.status(200);
                 res.should.be.text;

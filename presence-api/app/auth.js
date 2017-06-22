@@ -51,5 +51,10 @@ module.exports = {
         .catch(err => {
             throw err;
         });
+    },
+    getTestToken(secret, profile) {
+        const token = jwt.sign(profile, secret);
+        return token;
+
     }
 };
