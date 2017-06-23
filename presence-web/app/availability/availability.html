@@ -1,1 +1,16 @@
-<p>This is the partial for availability.</p>
+<div ng-repeat="team in teams">
+    <ul class="team-availability list-unstyled">
+        <li><h4 ng-bind="team.name"></h4></li>
+        <li ng-repeat="member in team.people" ng-class="highlight(member)">
+            <div class="row">
+                <div class="col-md-3" ng-bind="member.name"></div>
+                <div class="col-md-1" ng-bind="member.value"></div>
+                <div class="col-md-8" ng-bind="member.info"></div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div ng-class="userAvailability()">
+    <p>User availability here.</p>
+</div>
