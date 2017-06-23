@@ -27,6 +27,7 @@ Note: API is complete for MVP. Frontend CRUD needs to be implemented.
 - UI/UX improvements (responsive!)
 - Admin can set any user's availability
 - Full docker-compose environment (API and web and db)
+- Availability display updates in realtime without a page refresh (server push)
 
 #### Vnext
 
