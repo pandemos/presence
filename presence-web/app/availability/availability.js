@@ -63,16 +63,24 @@ angular.module('presence.availability', [
         }
 
         $scope.inOffice = () => {
-            $('.btn-in-office').addClass('btn-success active');
-            $('.btn-out-of-office').removeClass('active btn-danger');
+            $('.btn-in-office')
+                .addClass('btn-success active')
+                .attr('disabled', 'disabled');
+            $('.btn-out-of-office')
+                .removeClass('active btn-warning')
+                .removeAttr('disabled');
 
             $scope.teams[0].people[2].value = 'In';
             $scope.teams[1].people[0].value = 'In';
         }
 
         $scope.outOfOffice = () => {
-            $('.btn-in-office').removeClass('btn-success active');
-            $('.btn-out-of-office').addClass('active btn-danger');
+            $('.btn-in-office')
+                .removeClass('btn-success active')
+                .removeAttr('disabled');
+            $('.btn-out-of-office')
+                .addClass('active btn-warning')
+                .attr('disabled', 'disabled');
 
             $scope.teams[0].people[2].value = 'Out';
             $scope.teams[1].people[0].value = 'Out';
