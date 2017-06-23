@@ -74,7 +74,11 @@ router
     }))
 
     .get('get-fe-data', '/fedata', async ctx => {
-        await AvailabilityService.getFrontendData(ctx);
+        if (ctx.state.user) {
+            await AvailabilityService.getFrontendData(ctx, ctx.state.user._doc);
+        } else {
+            await AvailabilityService.getFrontendData(ctx);
+        }
     })
 
     /* Add additional routes here. */

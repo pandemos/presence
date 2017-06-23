@@ -75,21 +75,28 @@ module.exports = {
                 return await Promise.all(teamMembers).then(members => {
                     let result = [].concat.apply([], members);
                     result = UserService.convertUsersToProfiles(result);
-                    console.log(result);
                     ctx.body = result;
                     return result;
                 });
             })
     },
 
-    getFrontendData: async(ctx) => {
+    getFrontendData: async(ctx, user) => {
         await UserRepository
             .find()
             .then(users => {
                 const result = {
                     teams: [],
-                    user: ctx.state._doc ? ctx.state._doc.user : null
-                }
+                    user: user ? {
+                        username: user.username,
+                        email: user.email,
+                        name: user.username,
+                        uid: user.uid,
+                        tz: user.tz,
+                        coreHours: user.availability.coreHours,
+                        ooo: user.availability.scheduledOutOfOffice
+                    } : null
+                };
 
                 const flatten = arr => arr.reduce(
                     (acc, val) => acc.concat(
@@ -113,36 +120,10 @@ module.exports = {
                                 };
                             })
                     };
-                    console.log(teamData);
                     return teamData;
                 });
                 ctx.body = result;
                 return result;
-
-                /*user: {
-                     username: 'User 1',
-                     name: 'Person Three',
-                     uid: 3,
-                     tz: '-5:00',
-                     coreHours: {
-                     'start': 500,
-                     'end': 1100,
-                     'days': 'MTWHF'
-                     },
-                     ooo: [
-                     {
-                     'start': '2017-07-12',
-                     'end': '2017-07-12',
-                     'reason': 'Onsite at a client'
-                     },
-                     {
-                     'start': '2017-08-01',
-                     'end': '2017-08-23',
-                     'reason': 'On holiday in Paris'
-                     }
-                     ]
-                     }
-                */
             });
     }
 };

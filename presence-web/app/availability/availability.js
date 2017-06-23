@@ -20,9 +20,6 @@ angular.module('presence.availability', [
                 url: 'http://localhost:3000/fedata'
             }).then(response => {
 
-                console.log(response.data.teams);
-                console.log(response.data.user);
-
                 $scope.teams = response.data.teams;
                 $scope.user = response.data.user;
 
@@ -31,7 +28,7 @@ angular.module('presence.availability', [
                 setTimeout($scope.updateData, 10000);
             });
 
-        }
+        };
 
         $scope.highlight = member => {
             return member.value == 'In' ? 'info' : member.value == 'Unknown' ? 'danger' : 'warning';

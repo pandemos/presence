@@ -19,13 +19,21 @@
             <button type="button" class="btn-out-of-office btn btn-lg" ng-click="outOfOffice()">Out</button>
         </li>
         <li>
-            <p>Your upcoming PTO:</p>
-            <ul ng-repeat="ooo in user.ooo">
-                <li>
-                    <p><span ng-bind="ooo.start"></span> to <span ng-bind="ooo.end"></span></p>
-                    <p ng-bind="ooo.reason"></p>
-                </li>
-            </ul>
+            Your core hours are <span ng-bind="user.coreHours.start"></span> to <span ng-bind="user.coreHours.end"></span> in UTC<span ng-bind="user.coreHours.tz"></span>
+        </li>
+        <li>
+            <div ng-if="!user.ooo">
+                <p>You have no upcoming PTO scheduled.</p>
+            </div>
+            <div ng-if="user.ooo">
+                <p>Your upcoming PTO:</p>
+                <ul ng-repeat="ooo in user.ooo">
+                    <li>
+                        <p><span ng-bind="ooo.start"></span> to <span ng-bind="ooo.end"></span></p>
+                        <p ng-bind="ooo.reason"></p>
+                    </li>
+                </ul>
+            </div>
         </li>
 
     </ul>
