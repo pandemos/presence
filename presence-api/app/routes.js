@@ -73,6 +73,10 @@ router
         await AvailabilityService.getTeamAvailability(ctx, ctx.state.user._doc.uid);
     }))
 
+    .get('get-fe-data', '/fedata', async ctx => {
+        await AvailabilityService.getFrontendData(ctx);
+    })
+
     /* Add additional routes here. */
     ;
 

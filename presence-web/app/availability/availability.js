@@ -12,46 +12,25 @@ angular.module('presence.availability', [
         });
     }])
 
-    .controller('AvailabilityCtrl', ['$scope', function($scope) {
-        $scope.teams =
-            [{
-                name: 'Team One',
-                people: [
-                    { name: 'Person One', value: 'In'},
-                    { name: 'Person Two', value: 'Out', info: 'Core hours start tomorrow at 10:00AM CST'},
-                    { name: 'Person Three', value: 'In'}
-                ]
-            }, {
-                name: 'Team Two',
-                people: [
-                    { name: 'Person Three', value: 'In'},
-                    { name: 'Person Four', value: 'Out', info: 'On PTO until 7/21/2017: Visiting family'},
-                    { name: 'Person Five', value: 'Unknown', info: 'Core hours started today at 8:30AM CST'}
-                ]
-            }];
+    .controller('AvailabilityCtrl', ['$scope', '$http', function($scope, $http) {
+        $scope.updateData = () => {
 
-        $scope.user = {
-            username: 'User 1',
-            name: 'Person Three',
-            uid: 3,
-            tz: '-5:00',
-            coreHours: {
-                'start': 500,
-                'end': 1100,
-                'days': 'MTWHF'
-            },
-            ooo: [
-                {
-                    'start': '2017-07-12',
-                    'end': '2017-07-12',
-                    'reason': 'Onsite at a client'
-                },
-                {
-                    'start': '2017-08-01',
-                    'end': '2017-08-23',
-                    'reason': 'On holiday in Paris'
-                }
-            ]
+            $http({
+                method: 'GET',
+                url: 'http://localhost:3000/fedata'
+            }).then(response => {
+
+                console.log(response.data.teams);
+                console.log(response.data.user);
+
+                $scope.teams = response.data.teams;
+                $scope.user = response.data.user;
+
+                setTimeout($scope.updateData, 30000);
+            }, error => {
+                setTimeout($scope.updateData, 10000);
+            });
+
         }
 
         $scope.highlight = member => {
@@ -69,9 +48,6 @@ angular.module('presence.availability', [
             $('.btn-out-of-office')
                 .removeClass('active btn-warning')
                 .removeAttr('disabled');
-
-            $scope.teams[0].people[2].value = 'In';
-            $scope.teams[1].people[0].value = 'In';
         }
 
         $scope.outOfOffice = () => {
@@ -81,8 +57,7 @@ angular.module('presence.availability', [
             $('.btn-out-of-office')
                 .addClass('active btn-warning')
                 .attr('disabled', 'disabled');
-
-            $scope.teams[0].people[2].value = 'Out';
-            $scope.teams[1].people[0].value = 'Out';
         }
+
+        $scope.updateData();
     }]);

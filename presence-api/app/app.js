@@ -7,12 +7,14 @@
 
 const Koa = require('koa');
 const jwt = require('koa-jwt');
+const cors = require('koa-cors')
 const bodyParser = require('koa-bodyparser');
 const authHelper = require('./auth-helper.js');
 
 const router = require('./routes.js')();
 const app = new Koa();
 app.use(bodyParser());
+app.use(cors());
 
 // Set x-response-time header
 app.use(async function (ctx, next) {
