@@ -18,4 +18,5 @@ angular.module('presence.availability', [
         var date = jwtHelper.getTokenExpirationDate(expToken);
         var expired = jwtHelper.isTokenExpired(expToken);
         localStorage.setItem('id_token', expToken);
+        console.log(expToken);
     }]);
