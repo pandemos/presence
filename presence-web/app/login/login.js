@@ -13,6 +13,10 @@ angular.module('presence.login', [
 
     }])
 
-    .controller('LoginCtrl', ['jwtHelper', function(jwtHelper) {
-        localStorage.setItem('isLoggedIn', true);
+    .controller('LoginCtrl', ['jwtHelper', '$scope', '$location', function(jwtHelper, $scope, $location) {
+        $scope.doLogin = () => {
+            console.log('login');
+            localStorage.setItem('isLoggedIn', true);
+            $location.path('/availability');
+        };
     }]);

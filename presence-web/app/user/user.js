@@ -13,5 +13,8 @@ angular.module('presence.user', [
 
     }])
 
-    .controller('UserCtrl', ['jwtHelper', function(jwtHelper) {
+    .controller('UserCtrl', ['$location', function($location) {
+        if (localStorage.getItem('isLoggedIn') != 'true') {
+            $location.path('/availability');
+        }
     }]);
